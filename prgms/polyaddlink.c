@@ -97,7 +97,7 @@ Poly* addpoly(Poly *p, Poly *q, Poly *r)
         }
     }
 
-    return start;
+    return head;
 }
 
 void displaypoly(Poly *p)
