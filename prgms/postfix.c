@@ -36,7 +36,7 @@ int precedence(char c)
     }
 }
 
-void main(){
+int main(){   // FIX: use int main
     int i=0,j=0;
     char infix[100];
     char postfix[100];
@@ -44,6 +44,7 @@ void main(){
     printf("Enter infix expression: ");
     scanf("%s", infix);
     printf("\nToken\tStack\tPostfix\n");
+
     while(infix[i] != '\0'){
         char c = infix[i];
         if (c == '(')
@@ -69,21 +70,39 @@ void main(){
             }
             push(c);
         }
+
+        // FIX: print step only once per token
         printf("%c\t", c);
-        for (int k = 0; k <= top; k++) 
-            printf("%c", stack[k]);
-            printf("\t");
+        if (top != -1) {
+            for (int k = 0; k <= top; k++) 
+                printf("%c", stack[k]);
+        }
+        printf("\t");
         for (int k = 0; k < j; k++) 
             printf("%c", postfix[k]);
-            printf("\n");
-        i++;
-        
+        printf("\n");
 
+        i++;
     }
+
+    // FIX: Pop remaining operators and show in table
     while (top != -1)
     {
-        postfix[j++] = pop();
+        char x = pop();
+        postfix[j++] = x;
+
+        printf(" \t"); // no token left
+        if (top != -1) {
+            for (int k = 0; k <= top; k++) 
+                printf("%c", stack[k]);
+        }
+        printf("\t");
+        for (int k = 0; k < j; k++) 
+            printf("%c", postfix[k]);
+        printf("\n");
     }
+
     postfix[j] = '\0';
     printf("Postfix expression: %s\n", postfix);
+    return 0;
 }
