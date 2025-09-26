@@ -9,7 +9,7 @@ typedef struct node Node;
 
 Node *head = NULL;
 
-// Create new node
+
 Node* newnode(int val) {
     Node *p = (Node*)malloc(sizeof(Node));
     if (!p) {
@@ -21,14 +21,14 @@ Node* newnode(int val) {
     return p;
 }
 
-// Insert at beginning
+
 void insertfirst(int val) {
     Node *p = newnode(val);
     p->link = head;
     head = p;
 }
 
-// Delete a node by value
+
 void deletenode(int val) {
     Node *p = head, *prev = NULL;
     while (p != NULL && p->info != val) {
@@ -39,7 +39,7 @@ void deletenode(int val) {
         printf("Element not found\n");
         return;
     }
-    if (prev == NULL) { // deleting head
+    if (prev == NULL) { 
         head = p->link;
     } else {
         prev->link = p->link;
@@ -47,7 +47,7 @@ void deletenode(int val) {
     free(p);
 }
 
-// Delete first node
+
 void deletefirst() {
     if (head == NULL) {
         printf("List is empty\n");
@@ -58,7 +58,7 @@ void deletefirst() {
     free(p);
 }
 
-// Display the list
+
 void displaylist() {
     Node *p = head;
     if (p == NULL) {
@@ -72,7 +72,7 @@ void displaylist() {
     printf("\n");
 }
 
-// Count nodes
+
 int countnode() {
     Node *p = head;
     int count = 0;
@@ -83,7 +83,7 @@ int countnode() {
     return count;
 }
 
-// Insert after a specific node
+
 void insert(int val1, int val2) {
     Node *p = head;
     while (p != NULL && p->info != val1) {
@@ -98,7 +98,6 @@ void insert(int val1, int val2) {
     p->link = q;
 }
 
-// Insert before a specific node
 void insertbefore(int val1, int val2) {
     Node *p = head, *prev = NULL;
     while (p != NULL && p->info != val1) {
@@ -114,7 +113,7 @@ void insertbefore(int val1, int val2) {
     Node *q = newnode(val2);
     q->link = p;
 
-    if (p == head) { // insert before head
+    if (p == head) { 
         head = q;
     } else {
         prev->link = q;
