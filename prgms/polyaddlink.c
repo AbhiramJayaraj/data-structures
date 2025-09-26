@@ -18,8 +18,8 @@ Poly* newnode(int val1, int val2)
         printf("Memory allocation failed\n");
         return NULL;
     }
-    p->info = val1;   // coefficient
-    p->expo = val2;   // exponent
+    p->info = val1;  
+    p->expo = val2;  
     p->link = NULL;
     return p;
 }
@@ -27,11 +27,11 @@ Poly* newnode(int val1, int val2)
 Poly* addpoly(Poly *p, Poly *q, Poly *r)
 {
     r = (Poly*)malloc(sizeof(Poly));
-    Poly *head = r;   // keep pointer to first node
+    Poly *head = r;  
 
     while(p != NULL && q != NULL)
     {
-        if(p->expo == q->expo)   // FIXED ==
+        if(p->expo == q->expo)   
         {
             r->info = p->info + q->info;
             r->expo = p->expo;
