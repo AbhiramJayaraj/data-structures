@@ -12,7 +12,7 @@ typedef struct node Node;
 Node *head = NULL;
 Node *tail = NULL;
 
-// Insert at beginning
+
 Node* newnode(int val)
 {
     Node *p = (Node*)malloc(sizeof(Node));
@@ -25,7 +25,7 @@ Node* newnode(int val)
     p->prev = NULL;
     p->next = head;
 
-    if(head == NULL)   // fixed comparison
+    if(head == NULL)   
     {
         head = tail = p;
     }
@@ -37,7 +37,7 @@ Node* newnode(int val)
     return p;
 }
 
-// Insert at end
+
 Node* insertend(int val)
 {
     Node *p = (Node*)malloc(sizeof(Node));
@@ -62,7 +62,7 @@ Node* insertend(int val)
     return p;
 }
 
-// Display list
+
 void displaylist()
 {
     Node *p = head;
@@ -79,7 +79,7 @@ void displaylist()
     printf("\n");
 }
 
-// Insert after a node
+
 Node* insertafter(int val1, int val2)
 {
     Node *p = head;
@@ -103,7 +103,7 @@ Node* insertafter(int val1, int val2)
     q->prev = p;
     q->next = p->next;
 
-    if(p->next == NULL)   // fixed assignment
+    if(p->next == NULL)  
     {
         tail = q;
     }
@@ -115,7 +115,7 @@ Node* insertafter(int val1, int val2)
     return q;
 }
 
-// Insert before a node
+
 Node* insertbefore(int val1, int val2)
 {
     Node *p = head;
@@ -150,26 +150,53 @@ Node* insertbefore(int val1, int val2)
     p->prev = q;
     return q;
 }
-
-// Delete entire list
-void deletelist()
+void deletefirst()
 {
-    Node *p = head;
-    if(p == NULL)
-    {
-        printf("List is empty\n");
-        return;
-    }
-    while(head != NULL)
-    {
-        head = head->next;
-        free(p);
-        p = head;
-    }
-    tail = NULL;
-    printf("List deleted successfully\n");
+if(head==NULL)
+{	printf("\n list is empty\n");
+	return;
+}
+Node*p=head;
+if(head==tail)
+{
+	head=tail=NULL;
+}
+else
+{
+	head=head->next;
+	head->prev=NULL;
+}
+free(p);
 }
 
+void deletenode(int val)
+{
+Node* p=head;
+while(p!=NULL && p->info!=val)
+	p=p->next;
+if(p==NULL)
+	printf("\n list is empty\n");
+else
+{
+	if(p->prev==NULL)
+	{
+		head=p->next;
+	}
+	else
+	{
+		p->prev->next=p->next;
+	}
+	if(p->next==NULL)
+	{
+		tail=p->prev;
+	}
+	else
+	{
+		p->next->prev=p->prev;
+	}
+}
+free(p);
+}
 int main()
 {
     int choice, val1, val2;
@@ -180,8 +207,9 @@ int main()
         printf("3. Insert after a node\n");
         printf("4. Insert before a node\n");
         printf("5. Display list\n");
-        printf("6. Delete list\n");
-        printf("7. Exit\n");
+        printf("6. Deletefirst\n");
+        printf("7. deletenode\n");
+        printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -215,9 +243,14 @@ int main()
                 displaylist();
                 break;
             case 6:
-                deletelist();
+                deletefirst();
                 break;
             case 7:
+            	printf("enter the value to be deleted:");
+            	scanf("%d",&val1); 
+            	deletenode(val1);
+            	break;
+            case 8:
                 exit(0);
             default:
                 printf("Invalid choice\n");
@@ -225,5 +258,3 @@ int main()
     }
     return 0;
 }
-
-
