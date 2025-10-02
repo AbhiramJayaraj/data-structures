@@ -1,146 +1,137 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node
-{
+struct node {
     int info, expo;
     struct node *link;
 };
 typedef struct node Poly;
 
-Poly *a, *b, *c;
+Poly *a = NULL, *b = NULL, *c = NULL;
 
-Poly* newnode(int val1, int val2)
-{
+Poly* newnode(int val1, int val2) {
     Poly *p = (Poly*)malloc(sizeof(Poly));
-    if(!p)
-    {
+    if(!p) {
         printf("Memory allocation failed\n");
-        return NULL;
+        exit(1);
     }
-    p->info = val1;  
-    p->expo = val2;  
+    p->info = val1;   
+    p->expo = val2;   
     p->link = NULL;
     return p;
 }
 
-Poly* addpoly(Poly *p, Poly *q, Poly *r)
-{
-    r = (Poly*)malloc(sizeof(Poly));
-    Poly *head = r;  
 
-    while(p != NULL && q != NULL)
-    {
-        if(p->expo == q->expo)   
-        {
-            r->info = p->info + q->info;
-            r->expo = p->expo;
+Poly* insertend(Poly *head, int val1, int val2) {
+    Poly *p = newnode(val1, val2);
+    if(head == NULL) {
+        return p;
+    }
+    Poly *temp = head;
+    while(temp->link != NULL)
+        temp = temp->link;
+    temp->link = p;
+    return head;
+}
+
+
+Poly* createpoly() {
+    int n, coeff, exp;
+    Poly *head = NULL;
+    printf("Enter number of terms: ");
+    scanf("%d", &n);
+    for(int i=0; i<n; i++) {
+        printf("Enter coefficient and exponent for term %d: ", i+1);
+        scanf("%d%d", &coeff, &exp);
+        head = insertend(head, coeff, exp);
+    }
+    return head;
+}
+
+
+Poly* addpoly(Poly *p, Poly *q) {
+    Poly *head = NULL, *r = NULL;
+
+    while(p != NULL && q != NULL) {
+        int coeff, exp;
+        if(p->expo == q->expo) {
+            coeff = p->info + q->info;
+            exp = p->expo;
             p = p->link;
             q = q->link;
-        }
-        else if(p->expo > q->expo)
-        {
-            r->info = p->info;
-            r->expo = p->expo;
+        } else if(p->expo > q->expo) {
+            coeff = p->info;
+            exp = p->expo;
             p = p->link;
-        }
-        else
-        {
-            r->info = q->info;
-            r->expo = q->expo;
+        } else {
+            coeff = q->info;
+            exp = q->expo;
             q = q->link;
         }
 
-        if(p != NULL || q != NULL)
-        {
-            Poly *temp = (Poly*)malloc(sizeof(Poly));
+        Poly *temp = newnode(coeff, exp);
+        if(head == NULL) {
+            head = temp;
+            r = head;
+        } else {
             r->link = temp;
-            r = temp;
-        }
-        else
-        {
-            r->link = NULL;
+            r = r->link;
         }
     }
 
-    while(p != NULL)
-    {
-        r->info = p->info;
-        r->expo = p->expo;
+    while(p != NULL) {
+        Poly *temp = newnode(p->info, p->expo);
+        if(head == NULL) { head = temp; r = head; }
+        else { r->link = temp; r = r->link; }
         p = p->link;
-        if(p != NULL)
-        {
-            Poly *temp = (Poly*)malloc(sizeof(Poly));
-            r->link = temp;
-            r = temp;
-        }
-        else
-        {
-            r->link = NULL;
-        }
     }
 
-    while(q != NULL)
-    {
-        r->info = q->info;
-        r->expo = q->expo;
+    while(q != NULL) {
+        Poly *temp = newnode(q->info, q->expo);
+        if(head == NULL) { head = temp; r = head; }
+        else { r->link = temp; r = r->link; }
         q = q->link;
-        if(q != NULL)
-        {
-            Poly *temp = (Poly*)malloc(sizeof(Poly));
-            r->link = temp;
-            r = temp;
-        }
-        else
-        {
-            r->link = NULL;
-        }
     }
 
     return head;
 }
 
-void displaypoly(Poly *p)
-{
-    if(p == NULL)
-    {
+void displaypoly(Poly *p) {
+    if(p == NULL) {
         printf("Polynomial is empty\n");
         return;
     }
-    while(p != NULL)
-    {
+    while(p != NULL) {
         printf("%dx^%d", p->info, p->expo);
         p = p->link;
         if(p != NULL)
-        {
             printf(" + ");
-        }
     }
     printf("\n");
 }
 
-int main()
-{
-    int choice, val1, val2;
-    while(1)
-    {
+int main() {
+    int choice;
+    do
+        {
         printf("\n1.Create first polynomial\n2.Create second polynomial\n3.Add polynomials\n4.Display result polynomial\n5.Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&choice);
-        switch(choice)
-        {
+        switch(choice) {
             case 1:
-                printf("Enter coefficient and exponent of first polynomial: ");
-                scanf("%d%d",&val1,&val2);
-                a = newnode(val1, val2);
+                printf("Creating first polynomial...\n");
+                a = createpoly();
+                printf("First polynomial: ");
+                displaypoly(a);
                 break;
             case 2:
-                printf("Enter coefficient and exponent of second polynomial: ");
-                scanf("%d%d",&val1,&val2);
-                b = newnode(val1, val2);
+                printf("Creating second polynomial...\n");
+                b = createpoly();
+                printf("Second polynomial: ");
+                displaypoly(b);
                 break;
             case 3:
-                c = addpoly(a, b, c);
+                c = addpoly(a, b);
                 printf("Polynomials added successfully\n");
                 break;
             case 4:
@@ -148,10 +139,10 @@ int main()
                 displaypoly(c);
                 break;
             case 5:
-                exit(0);
+                break;
             default:
                 printf("Invalid choice\n");
         }
-    }
+    }while(choice!=5);
     return 0;
 }
