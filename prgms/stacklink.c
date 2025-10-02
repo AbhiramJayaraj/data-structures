@@ -24,7 +24,7 @@ Node* newnode(int val) {
 
 void push(int val) {
     Node *p = newnode(val);
-    if (!p) return; 
+    if (!p) return;
     p->link = top;
     top = p;
 }
@@ -38,7 +38,7 @@ int isempty() {
 int pop() {
     if (isempty()) {
         printf("Stack is empty\n");
-        return -1;
+        return -1; 
     }
     int item = top->info;
     Node *p = top;
@@ -55,14 +55,31 @@ int peek() {
     }
     return top->info;
 }
+void display() {
+    if (isempty()) {
+        printf("Stack is empty\n");
+        return;
+    }
+    Node *p = top;
+    printf("Stack elements: ");
+    while (p != NULL) {
+        printf("%d ", p->info);
+        p = p->link;
+    }
+    printf("\n");
+}
 
 int main() {
     int choice, val;
-    while (1) {
-        printf("\n1. Push\n2. Pop\n3. Peek\n4. IsEmpty\n5. Exit\n");
+    do {
+    
+        printf("\n1. Push\n2. Pop\n3. Peek\n4. IsEmpty\n5. display\n6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
+    
+    
+    
+    
         switch (choice) {
             case 1:
                 printf("Enter the value to be pushed: ");
@@ -90,13 +107,18 @@ int main() {
                 else
                     printf("Stack is not empty\n");
                 break;
-
             case 5:
-                exit(0);
+                display();
+                break;
+
+            case 6:
+                break;
 
             default:
                 printf("Invalid choice\n");
         }
-    }
+    }while (choice != 6);
+
+    
     return 0;
 }
