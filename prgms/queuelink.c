@@ -23,7 +23,7 @@ Node* newnode(int val)
 void insertrear(int val)
 {
     Node *p=newnode(val);
-    if(!p) return; // malloc failed
+    if(!p) return;
     if(f==NULL)
     {
         f=r=p;
@@ -43,12 +43,12 @@ int deletefront()
     if(isempty())
     {
         printf("Queue is empty\n");
-        return -1; // sentinel
+        return -1; 
     }
     int item=f->info;
     Node *p=f;
     f=f->link;
-    if(f==NULL) r=NULL; // queue is now empty
+    if(f==NULL) r=NULL; 
     free(p);
     return item;
 }
