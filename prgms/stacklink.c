@@ -9,7 +9,7 @@ typedef struct node Node;
 
 Node *top = NULL;
 
-// Create new node
+
 Node* newnode(int val) {
     Node *p = (Node*)malloc(sizeof(Node));
     if (!p) {
@@ -21,24 +21,24 @@ Node* newnode(int val) {
     return p;
 }
 
-// Push operation
+
 void push(int val) {
     Node *p = newnode(val);
-    if (!p) return; // malloc failed
+    if (!p) return; 
     p->link = top;
     top = p;
 }
 
-// Check empty
+
 int isempty() {
     return (top == NULL);
 }
 
-// Pop operation
+
 int pop() {
     if (isempty()) {
         printf("Stack is empty\n");
-        return -1; // sentinel
+        return -1;
     }
     int item = top->info;
     Node *p = top;
@@ -47,7 +47,7 @@ int pop() {
     return item;
 }
 
-// Peek operation
+
 int peek() {
     if (isempty()) {
         printf("Stack is empty\n");
