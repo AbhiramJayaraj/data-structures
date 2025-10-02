@@ -15,7 +15,7 @@ void readpoly(Poly **ptr)
     printf("Enter the highest degree of polynomial: ");
     scanf("%d", &n);
     *ptr = (Poly*)malloc((n + 1) * sizeof(Poly));
-    Poly *a = *ptr;  // temporary pointer
+    Poly *a = *ptr;  
     for(i = n; i >= 0; i--)
     {
         printf("Enter the coefficient of x^%d: ", i);
@@ -27,7 +27,7 @@ void readpoly(Poly **ptr)
 
 void displaypoly(Poly *p)
 {
-    Poly *a = p;  // temporary pointer
+    Poly *a = p;  
     for(i = n; i >= 0; i--)
     {
         printf("%dx^%d", a->info, a->expo);
@@ -42,9 +42,9 @@ void displaypoly(Poly *p)
 
 void addpoly(Poly *p, Poly *q, Poly *r)
 {
-    Poly *a = p;  // temporary pointer for first polynomial
-    Poly *b = q;  // temporary pointer for second polynomial
-    Poly *c = r;  // temporary pointer for result polynomial
+    Poly *a = p;  
+    Poly *b = q;  
+    Poly *c = r;  
     for(i = n; i >= 0; i--)
     {
         c->info = a->info + b->info;
