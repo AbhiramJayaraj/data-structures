@@ -36,7 +36,7 @@ int precedence(char c)
     }
 }
 
-int main(){   // FIX: use int main
+int main(){   
     int i=0,j=0;
     char infix[100];
     char postfix[100];
@@ -71,7 +71,7 @@ int main(){   // FIX: use int main
             push(c);
         }
 
-        // FIX: print step only once per token
+        
         printf("%c\t", c);
         if (top != -1) {
             for (int k = 0; k <= top; k++) 
@@ -85,13 +85,13 @@ int main(){   // FIX: use int main
         i++;
     }
 
-    // FIX: Pop remaining operators and show in table
+    
     while (top != -1)
     {
         char x = pop();
         postfix[j++] = x;
 
-        printf(" \t"); // no token left
+        printf(" \t"); 
         if (top != -1) {
             for (int k = 0; k <= top; k++) 
                 printf("%c", stack[k]);
