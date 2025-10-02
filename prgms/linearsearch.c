@@ -10,7 +10,7 @@ int linear(int a[], int n, int ele)
             return i;
         }
     }
-    return -1; // Return -1 if not found
+    return -1; 
 }
 
 int main()
