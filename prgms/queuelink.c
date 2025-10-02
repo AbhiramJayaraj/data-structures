@@ -23,7 +23,7 @@ Node* newnode(int val)
 void insertrear(int val)
 {
     Node *p=newnode(val);
-    if(!p) return;
+    if(!p) return; 
     if(f==NULL)
     {
         f=r=p;
@@ -43,7 +43,7 @@ int deletefront()
     if(isempty())
     {
         printf("Queue is empty\n");
-        return -1; 
+        return -1;    
     }
     int item=f->info;
     Node *p=f;
@@ -61,14 +61,36 @@ int peek()
     }
     return f->info;
 }
+void display()
+{
+    if(isempty())
+    {
+        printf("Queue is empty\n");
+        return;
+    }
+    Node *p=f;
+    printf("Queue elements:");
+    while(p)
+    {
+        
+        printf(" %d",p->info);
+        p=p->link;
+    }
+    
+    printf("\n");
+}
 int main()
 {
     int choice,val;
-    while(1)
+    do
     {
-        printf("1.Insert\n2.Delete\n3.Peek\n4.Exit\n");
+  
+    
+    
+        printf("1.Insert\n2.Delete\n3.Peek\n4.display\n5.Exit\n");
         printf("Enter your choice:");
         scanf("%d",&choice);
+    
         switch(choice)
         {
             case 1:printf("Enter value to be inserted:");
@@ -87,9 +109,13 @@ int main()
                        printf("Front element is %d\n",val);
                    }
                    break;
-            case 4:exit(0);
+            case 4:display();
+                   break;
+            case 5:
+                   break;
             default:printf("Invalid choice\n");
         }
-    }
+    }while(choice!=5);
     return 0;
 }
+
