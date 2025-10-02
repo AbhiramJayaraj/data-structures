@@ -26,7 +26,7 @@ int deleteque() {
         return -1;
     } else {
         int item = q[front];
-        if(front == rear) { // only one element
+        if(front == rear) { 
             front = -1;
             rear = -1;
         } else {
