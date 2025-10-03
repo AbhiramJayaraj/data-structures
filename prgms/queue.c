@@ -43,18 +43,36 @@ void peek() {
         printf("Front element is %d\n", q[front]);
 }
 
-int check_empty() {
+int check_empty() 
+{
     return front == -1;
 }
 
-int check_full() {
+int check_full() 
+{
     return (rear + 1) % size == front;
+}
+
+void displayqueue() 
+{
+    if (check_empty()) {
+        printf("Queue is empty\n");
+        return;
+    }
+    int i = front;
+    printf("Queue elements: ");
+    while (i != -1) {
+        printf("%d ", q[i]);
+        if (i == rear) break;
+        i = (i + 1) % size;
+    }
+    printf("\n");
 }
 
 int main() {
     int choice, item;
     do {
-        printf("\n1: Insert\n2: Delete\n3: Peek\n4: Status\n5: Exit\n");
+        printf("\n1: Insert\n2: Delete\n3: Peek\n4: Status\n5: displayqueue\n6: Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch(choice) {
@@ -79,12 +97,15 @@ int main() {
                 else
                     printf("Queue has space available\n");
                 break;
-            case 5:
+           case 5:
+            	displayqueue();
+            	break;
+           case 6:
                 printf("Exiting...\n");
                 break;
             default:
                 printf("Invalid choice! Please try again.\n");
         }
-    } while(choice != 5);
+    } while(choice != 6);
     return 0;
 }
