@@ -4,15 +4,20 @@
 int q[size];
 int front = -1, rear = -1;
 
-int insertque(int item) {
-    if((rear + 1) % size == front) {
+int insertque(int item) 
+{
+    if((rear + 1) % size == front) 
+    {
         printf("Queue is full\n");
         return 0;
-    } else {
-        if(front == -1) {
+    } else 
+    {
+        if(front == -1) 
+        {
             front = 0;
             rear = 0;
-        } else {
+        } else 
+        {
             rear = (rear + 1) % size;
         }
         q[rear] = item;
@@ -20,23 +25,29 @@ int insertque(int item) {
     return 1;
 }
 
-int deleteque() {
-    if(front == -1) {
+int deleteque() 
+{
+    if(front == -1) 
+    {
         printf("Queue is empty\n");
         return -1;
-    } else {
+    } else 
+    {
         int item = q[front];
-        if(front == rear) { 
+        if(front == rear) 
+        { 
             front = -1;
             rear = -1;
-        } else {
+        } else 
+        {
             front = (front + 1) % size;
         }
         return item;
     }
 }
 
-void peek() {
+void peek() 
+{
     if(front == -1)
         printf("Queue is empty\n");
     else
@@ -55,13 +66,15 @@ int check_full()
 
 void displayqueue() 
 {
-    if (check_empty()) {
+    if (check_empty()) 
+    {
         printf("Queue is empty\n");
         return;
     }
     int i = front;
     printf("Queue elements: ");
-    while (i != -1) {
+    while (i != -1) 
+    {
         printf("%d ", q[i]);
         if (i == rear) break;
         i = (i + 1) % size;
@@ -69,9 +82,11 @@ void displayqueue()
     printf("\n");
 }
 
-int main() {
+int main() 
+{
     int choice, item;
-    do {
+    do 
+    {
         printf("\n1: Insert\n2: Delete\n3: Peek\n4: Status\n5: displayqueue\n6: Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
