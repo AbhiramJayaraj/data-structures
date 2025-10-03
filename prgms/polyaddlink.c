@@ -9,9 +9,11 @@ typedef struct node Poly;
 
 Poly *a = NULL, *b = NULL, *c = NULL;
 
-Poly* newnode(int val1, int val2) {
+Poly* newnode(int val1, int val2) 
+{
     Poly *p = (Poly*)malloc(sizeof(Poly));
-    if(!p) {
+    if(!p) 
+    {
         printf("Memory allocation failed\n");
         exit(1);
     }
@@ -22,9 +24,11 @@ Poly* newnode(int val1, int val2) {
 }
 
 
-Poly* insertend(Poly *head, int val1, int val2) {
+Poly* insertend(Poly *head, int val1, int val2) 
+{
     Poly *p = newnode(val1, val2);
-    if(head == NULL) {
+    if(head == NULL) 
+    {
         return p;
     }
     Poly *temp = head;
@@ -35,12 +39,14 @@ Poly* insertend(Poly *head, int val1, int val2) {
 }
 
 
-Poly* createpoly() {
+Poly* createpoly() 
+{
     int n, coeff, exp;
     Poly *head = NULL;
     printf("Enter number of terms: ");
     scanf("%d", &n);
-    for(int i=0; i<n; i++) {
+    for(int i=0; i<n; i++) 
+    {
         printf("Enter coefficient and exponent for term %d: ", i+1);
         scanf("%d%d", &coeff, &exp);
         head = insertend(head, coeff, exp);
@@ -49,59 +55,79 @@ Poly* createpoly() {
 }
 
 
-Poly* addpoly(Poly *p, Poly *q) {
+Poly* addpoly(Poly *p, Poly *q) 
+{
     Poly *head = NULL, *r = NULL;
 
-    while(p != NULL && q != NULL) {
+    while(p != NULL && q != NULL) 
+    {
         int coeff, exp;
-        if(p->expo == q->expo) {
+        if(p->expo == q->expo) 
+        {
             coeff = p->info + q->info;
             exp = p->expo;
             p = p->link;
             q = q->link;
-        } else if(p->expo > q->expo) {
+        } else if(p->expo > q->expo) 
+        {
             coeff = p->info;
             exp = p->expo;
             p = p->link;
-        } else {
+        } else 
+        {
             coeff = q->info;
             exp = q->expo;
             q = q->link;
         }
 
         Poly *temp = newnode(coeff, exp);
-        if(head == NULL) {
+        if(head == NULL) 
+        {
             head = temp;
             r = head;
-        } else {
+        } else 
+        {
             r->link = temp;
             r = r->link;
         }
     }
 
-    while(p != NULL) {
+    while(p != NULL) 
+    {
         Poly *temp = newnode(p->info, p->expo);
-        if(head == NULL) { head = temp; r = head; }
-        else { r->link = temp; r = r->link; }
+        if(head == NULL) 
+        { head = temp; r = head; 
+        }
+        else 
+        { r->link = temp; r = r->link; 
+        }
         p = p->link;
     }
 
-    while(q != NULL) {
+    while(q != NULL) 
+    {
         Poly *temp = newnode(q->info, q->expo);
-        if(head == NULL) { head = temp; r = head; }
-        else { r->link = temp; r = r->link; }
+        if(head == NULL) 
+        { head = temp; r = head; 
+        }
+        else 
+        { r->link = temp; r = r->link; 
+        }
         q = q->link;
     }
 
     return head;
 }
 
-void displaypoly(Poly *p) {
-    if(p == NULL) {
+void displaypoly(Poly *p) 
+{
+    if(p == NULL) 
+    {
         printf("Polynomial is empty\n");
         return;
     }
-    while(p != NULL) {
+    while(p != NULL) 
+    {
         printf("%dx^%d", p->info, p->expo);
         p = p->link;
         if(p != NULL)
