@@ -76,7 +76,8 @@ void displayqueue()
     while (i != -1) 
     {
         printf("%d ", q[i]);
-        if (i == rear) break;
+        if (i == rear) 
+            break;
         i = (i + 1) % size;
     }
     printf("\n");
