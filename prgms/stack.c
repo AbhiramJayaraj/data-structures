@@ -48,12 +48,22 @@ void peek(){
 	else
 		printf("Top element is %d\n", s[top-1]);
 }
+void display(){
+	if(check_empty())
+		printf("Stack is empty !!");
+	else{
+		printf("Stack elements are: ");
+		for(int i=top-1; i>=0; i--)
+			printf("%d ", s[i]);
+		printf("\n");
+	}
+}
 
 void main()
 {
 	int choice, n;
 	do{
-		printf("1: Push\n2: Pop\n3: Peek\n4: Status\n5: Exit\n");
+		printf("1: Push\n2: Pop\n3: Peek\n4: Status\n5: display\n6: Exit\n");
 		printf("Enter your choice: \n");
 		scanf("%d",&choice);
 		switch(choice)
@@ -83,10 +93,12 @@ void main()
 					else
 						printf("Memory available\n");
 				break;
-			case 5: printf("\nThank you!");
+			case 5: display();
+				break;
+			case 6: printf("\nThank you!");
 				break;
 			default: printf("Invalid input please try again.\n");
 		}
 		printf("\n");
-	} while(choice != 5);
+	} while(choice != 6);
 }
