@@ -5,11 +5,11 @@ void swap(int*a, int*b)
     *a=*b;
     *b=temp;
 }
-int left(i)
+int left(int i)
 {
     return(2*i);
 }
-int right(i)
+int right(int i)
 {
     return(2*i+1);
 }
@@ -58,4 +58,5 @@ int main()
         printf("%d ",a[i]);
     printf("\n");
     return 0;
+
 }
